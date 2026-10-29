@@ -14,7 +14,7 @@ global proc shelf_juju () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "save_vignette" 
+        -annotation "save vignette" 
         -enableBackground 0
         -backgroundColor 0 0 0 
         -highlightColor 0.321569 0.521569 0.65098 
@@ -106,7 +106,7 @@ global proc shelf_juju () {
         -commandRepeatable 0
         -flat 1
     ;
-	separator
+    separator
         -enable 1
         -width 12
         -height 35
@@ -118,6 +118,74 @@ global proc shelf_juju () {
         -highlightColor 0.321569 0.521569 0.65098 
         -style "shelf" 
         -horizontal 0
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "preview Render" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "preview_render" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 0
+        -marginHeight 1
+        -command "setAttr \"defaultArnoldRenderOptions.AASamples\" 2;\nsetAttr \"defaultArnoldRenderOptions.GIDiffuseSamples\" 1;\nsetAttr \"defaultArnoldRenderOptions.GISpecularSamples\" 1;\nsetAttr \"defaultArnoldRenderOptions.GITransmissionSamples\" 1;\nsetAttr \"defaultArnoldRenderOptions.GISssSamples\" 0;\n\nsetAttr \"defaultArnoldRenderOptions.GIDiffuseDepth\" 1;\nsetAttr \"defaultArnoldRenderOptions.GISpecularDepth\" 1;\nsetAttr \"defaultArnoldRenderOptions.GITransmissionDepth\" 1;print(\"User defined macro\");" 
+        -sourceType "python" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "User Script" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "AOV" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 0
+        -marginHeight 1
+        -command "import maya.cmds as cmds\n\n#0                \naov = cmds.createNode(\"aiAOV\", name=\"aiAOV_Z\")\ncmds.setAttr(aov + \".name\", \"Z\", type=\"string\")\n\n\ncmds.connectAttr(aov + \".message\",\n                 \"defaultArnoldRenderOptions.aovList\",\n                 nextAvailable=True)\n\n#1\naov = cmds.createNode(\"aiAOV\", name=\"_aov_cryptomatte\")\ncmds.setAttr(aov + \".name\", \"crypto_asset\", type=\"string\")\n\ncmds.connectAttr(aov + \".message\",\n                 \"defaultArnoldRenderOptions.aovList\",\n                 nextAvailable=True)" 
+        -sourceType "python" 
+        -commandRepeatable 1
+        -flat 1
     ;
 
 } 
