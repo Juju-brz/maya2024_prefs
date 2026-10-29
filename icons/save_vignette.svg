@@ -47,14 +47,14 @@
        y="11.776951"
        ry="6.2049704" />
     <ellipse
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4.4;stroke-opacity:1"
+       style="fill:#3a3a38;stroke:#000000;stroke-width:2;stroke-miterlimit:4.4;stroke-opacity:1;fill-opacity:0.58944279"
        id="path1"
        cx="30.362453"
        cy="35.146839"
        rx="10.856877"
        ry="10.120818" />
     <rect
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4.4;stroke-opacity:1"
+       style="fill:#c6c7bf;stroke:#000000;stroke-width:2;stroke-miterlimit:4.4;stroke-opacity:1;fill-opacity:0.58944279"
        id="rect2"
        width="9.9368029"
        height="33.122677"
