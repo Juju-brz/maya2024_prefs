@@ -95,6 +95,40 @@ global proc shelf_juju () {
         -manage 1
         -visible 1
         -preventOverride 0
+        -annotation "Output Config" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Output Config" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 0
+        -marginHeight 1
+        -command "import maya.cmds as cmds\n# --- Résolution ---\ncmds.setAttr('defaultResolution.lockDeviceAspectRatio', 0)\ncmds.setAttr('defaultResolution.width', 1920)\ncmds.setAttr('defaultResolution.height', 1080)\n\n# IMAGE FORMAT\ncmds.setAttr('defaultArnoldDriver.aiTranslator', 'exr', type='string') \ncmds.setAttr('defaultArnoldDriver.mergeAOVs', 1)\n\n\n# ANIMATION OUTPUT ANIME\n\ng = 'defaultRenderGlobals.'\ncmds.setAttr(g + 'animation', 1)\ncmds.setAttr(g + 'outFormatControl', 0)\ncmds.setAttr(g + 'putFrameBeforeExt', 1)\ncmds.setAttr(g + 'periodInExt', 2)        # 2 = \"_\"\ncmds.setAttr(g + 'extensionPadding', 4)\ncmds.setAttr(g + 'imageFilePrefix', 'name', type='string')" 
+        -sourceType "python" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
         -annotation "preview Render" 
         -enableBackground 0
         -backgroundColor 0 0 0 
@@ -114,7 +148,7 @@ global proc shelf_juju () {
         -style "iconOnly" 
         -marginWidth 0
         -marginHeight 1
-        -command "setAttr \"defaultArnoldDriver.mergeAOVs\" 1;\n\nsetAttr \"defaultArnoldRenderOptions.AASamples\" 2;\nsetAttr \"defaultArnoldRenderOptions.GIDiffuseSamples\" 1;\nsetAttr \"defaultArnoldRenderOptions.GISpecularSamples\" 1;\nsetAttr \"defaultArnoldRenderOptions.GITransmissionSamples\" 1;\nsetAttr \"defaultArnoldRenderOptions.GISssSamples\" 0;\n\nsetAttr \"defaultArnoldRenderOptions.GIDiffuseDepth\" 1;\nsetAttr \"defaultArnoldRenderOptions.GISpecularDepth\" 1;\nsetAttr \"defaultArnoldRenderOptions.GITransmissionDepth\" 1;print(\"User defined macro\");" 
+        -command "\n\n// ARNOLD RENDERER //\nsetAttr \"defaultArnoldRenderOptions.AASamples\" 2;\nsetAttr \"defaultArnoldRenderOptions.GIDiffuseSamples\" 1;\nsetAttr \"defaultArnoldRenderOptions.GISpecularSamples\" 1;\nsetAttr \"defaultArnoldRenderOptions.GITransmissionSamples\" 1;\nsetAttr \"defaultArnoldRenderOptions.GISssSamples\" 0;\n\nsetAttr \"defaultArnoldRenderOptions.GIDiffuseDepth\" 1;\nsetAttr \"defaultArnoldRenderOptions.GISpecularDepth\" 1;\nsetAttr \"defaultArnoldRenderOptions.GITransmissionDepth\" 1;print(\"User defined macro\");" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -148,7 +182,7 @@ global proc shelf_juju () {
         -style "iconOnly" 
         -marginWidth 0
         -marginHeight 1
-        -command "setAttr \"defaultArnoldDriver.mergeAOVs\" 1;\n\nsetAttr \"defaultArnoldRenderOptions.AASamples\" 4;             //AA\nsetAttr \"defaultArnoldRenderOptions.GIDiffuseSamples\" 2;     \nsetAttr \"defaultArnoldRenderOptions.GISpecularSamples\" 2;\nsetAttr \"defaultArnoldRenderOptions.GITransmissionSamples\" 1;\nsetAttr \"defaultArnoldRenderOptions.GISssSamples\" 0; \nsetAttr \"defaultArnoldRenderOptions.GIVolumeSamples\" 2;\n\n\nsetAttr \"defaultArnoldRenderOptions.GIDiffuseDepth\" 2;\nsetAttr \"defaultArnoldRenderOptions.GISpecularDepth\" 1;\nsetAttr \"defaultArnoldRenderOptions.GITransmissionDepth\" 1;" 
+        -command "\n// ARNOLD RENDERER //\nsetAttr \"defaultArnoldRenderOptions.AASamples\" 4;             //AA\nsetAttr \"defaultArnoldRenderOptions.GIDiffuseSamples\" 2;     \nsetAttr \"defaultArnoldRenderOptions.GISpecularSamples\" 2;\nsetAttr \"defaultArnoldRenderOptions.GITransmissionSamples\" 1;\nsetAttr \"defaultArnoldRenderOptions.GISssSamples\" 0; \nsetAttr \"defaultArnoldRenderOptions.GIVolumeSamples\" 2;\n\n\nsetAttr \"defaultArnoldRenderOptions.GIDiffuseDepth\" 2;\nsetAttr \"defaultArnoldRenderOptions.GISpecularDepth\" 1;\nsetAttr \"defaultArnoldRenderOptions.GITransmissionDepth\" 1;" 
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -182,7 +216,7 @@ global proc shelf_juju () {
         -style "iconOnly" 
         -marginWidth 0
         -marginHeight 1
-        -command "import maya.cmds as cmds\n\n#0                \naov = cmds.createNode(\"aiAOV\", name=\"aiAOV_Z\")\ncmds.setAttr(aov + \".name\", \"Z\", type=\"string\")\n\n\ncmds.connectAttr(aov + \".message\",\n                 \"defaultArnoldRenderOptions.aovList\",\n                 nextAvailable=True)\n\n\naov = cmds.createNode(\"aiAOV\", name=\"aiAOV_N\")\ncmds.setAttr(aov + \".name\", \"N\", type=\"string\")\n\n\ncmds.connectAttr(aov + \".message\",\n                 \"defaultArnoldRenderOptions.aovList\",\n                 nextAvailable=True)\n\"\"\"\naov = cmds.createNode(\"aiAOV\", name=\"aiAOV_albedo\")\ncmds.setAttr(aov + \".name\", \"albedo\", type=\"string\")\n\n\ncmds.connectAttr(aov + \".message\",\n                 \"defaultArnoldRenderOptions.aovList\",\n                 nextAvailable=True)\n\"\"\"\n\n### CRYPTO ###\n#1\naov = cmds.createNode(\"aiAOV\", name=\"_aov_cryptomatte\")\ncmds.setAttr(aov + \".name\", \"crypto_asset\", type=\"string\")\n\ncmds.connectAttr(aov + \".message\",\n                 \"defaultArnoldRenderOptions.aovList\",\n                 nextAvailable=True)\n\n#2\naov = cmds.createNode(\"aiAOV\", name=\"aiAOV_crypto_material\")\ncmds.setAttr(aov + \".name\", \"crypto_material\", type=\"string\")\n\ncmds.connectAttr(aov + \".message\",\n                 \"defaultArnoldRenderOptions.aovList\",\n                 nextAvailable=True)\n\naov = cmds.createNode(\"aiAOV\", name=\"_aov_cryptomatte2\")\ncmds.setAttr(aov + \".name\", \"crypto_object\", type=\"string\")\n\ncmds.connectAttr(aov + \".message\",\n                 \"defaultArnoldRenderOptions.aovList\",\n                 nextAvailable=True)" 
+        -command "import maya.cmds as cmds\nimport mtoa.aovs as aovs\n\n#0                \naov = cmds.createNode(\"aiAOV\", name=\"aiAOV_Z\")\ncmds.setAttr(aov + \".name\", \"Z\", type=\"string\")\n\n\ncmds.connectAttr(aov + \".message\",\n                 \"defaultArnoldRenderOptions.aovList\",\n                 nextAvailable=True)\n\n\naov = cmds.createNode(\"aiAOV\", name=\"aiAOV_N\")\ncmds.setAttr(aov + \".name\", \"N\", type=\"string\", data +\"vector\")\n\n\ncmds.connectAttr(aov + \".message\",\n                 \"defaultArnoldRenderOptions.aovList\",\n                 nextAvailable=True)\n\"\"\"\naov = cmds.createNode(\"aiAOV\", name=\"aiAOV_albedo\")\ncmds.setAttr(aov + \".name\", \"albedo\", type=\"string\")\n\n\ncmds.connectAttr(aov + \".message\",\n                 \"defaultArnoldRenderOptions.aovList\",\n                 nextAvailable=True)\n\"\"\"\n\n### CRYPTO ###\n#1\naov = cmds.createNode(\"aiAOV\", name=\"_aov_cryptomatte\")\ncmds.setAttr(aov + \".name\", \"crypto_asset\", type=\"string\")\n\ncmds.connectAttr(aov + \".message\",\n                 \"defaultArnoldRenderOptions.aovList\",\n                 nextAvailable=True)\n\n#2\naov = cmds.createNode(\"aiAOV\", name=\"aiAOV_crypto_material\")\ncmds.setAttr(aov + \".name\", \"crypto_material\", type=\"string\")\n\ncmds.connectAttr(aov + \".message\",\n                 \"defaultArnoldRenderOptions.aovList\",\n                 nextAvailable=True)\n\naov = cmds.createNode(\"aiAOV\", name=\"_aov_cryptomatte2\")\ncmds.setAttr(aov + \".name\", \"crypto_object\", type=\"string\")\n\ncmds.connectAttr(aov + \".message\",\n                 \"defaultArnoldRenderOptions.aovList\",\n                 nextAvailable=True)" 
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
